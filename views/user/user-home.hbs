@@ -14,7 +14,7 @@
 						<!-- Single Product -->
 						{{#each products}}
 						<div class="col-6 col-md-6 col-lg-4 col-xl-3">
-								<div id="{{this.proId}}" class="single-product" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.15);">
+								<div id="{{this._id}}" class="single-product" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.15);">
 										<div class="part-1">
 												<span class="new">new</span>
 												<ul>
@@ -25,9 +25,9 @@
 												</ul>
 										</div>
 										<div class="part-2 pl-2">
-												<h3 class="product-title">{{this.title}}</h3>
-                                                <h3 class="product-title">Bangles</h3>
-												<h4 class="product-price">${{this.price}}</h4>
+												<h3 class="product-title">{{this.Name}}</h3>
+                                                <h3 class="product-title">{{this.Catogery}}</h3>
+												<h4 class="product-price">Rs. {{this.Price}}</h4>
 										</div>
 								</div>
 						</div>
@@ -37,7 +37,7 @@
 </section>
 
 <style>
-    @import url('https://www.kalyanjewellers.net/images/Jewellery/Gold/images/rebha-sankalp-gold-necklace.jpg');
+   
 
 body {
     font-family: "Poppins", sans-serif;
@@ -101,8 +101,8 @@ a:hover {
 
 {{#each products}}
 
-.section-products #{{this.proId}} .part-1::before {
-    background: url({{this.image}}) no-repeat center;
+.section-products #{{this._id}} .part-1::before {
+    background: url("https://www.kalyanjewellers.net/images/Jewellery/Gold/images/rebha-sankalp-gold-necklace.jpg") no-repeat center;
     background-size: cover;
 }
 
