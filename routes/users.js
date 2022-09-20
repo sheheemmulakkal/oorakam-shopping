@@ -11,4 +11,18 @@ router.get('/', function(req, res, next) {
   })
 });
 
+router.get('/login', (req,res)=>{
+ res.render('user/login')
+})
+
+
+router.get('/signup',(req,res)=>{
+  res.render('user/signup')
+})
+
+router.post('/signup',(req,res)=>{
+  console.log(req.body);
+  userHelpers.doSignup(req.body)
+  res.redirect('/')
+})
 module.exports = router;
