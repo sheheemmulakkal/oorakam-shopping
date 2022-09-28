@@ -44,8 +44,17 @@
 
     <!-- Right elements -->
     <div class="login-btn">
+
+      {{#if user}}
+        <a href="" class="">{{user.Name}}  </a>
+         <a href="/logout" class="btn btn-succes">logout</a>
+      {{else}}
         <a href="/signup" class="">Sign up  </a>
         <a href="/login" class="btn btn-primary">login</a>
+      {{/if}}
+
+
+        
         
     </div>
     <!-- Right elements -->

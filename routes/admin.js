@@ -10,7 +10,7 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/add-products',(req,res)=>{
-  res.render('admin/add-products')
+  res.render('admin/add-products',{admin:true})
 })
 
 router.post('/add-products',(req,res)=>{
@@ -21,12 +21,22 @@ router.post('/add-products',(req,res)=>{
         console.log('hiiiii');
         res.render('admin/add-products')
       }else{
-        console.log(err);
+        console.log(err)
       }
     })
   })
 })
+router.get('/add-goldrate',(req,res)=>{
+  res.render('admin/add-goldRate',{admin:true})
+})
 
+router.post('/add-goldRate',(req,res)=>{
+ 
+  productHelpers.goldRate(req.body).then(()=>{
+  
+    res.render('admin/add-goldRate')
+  })
+})
 
 
 module.exports = router;

@@ -13,6 +13,7 @@ var userRouter = require('./routes/users');
 var app = express();
 var fileUpload = require('express-fileupload')
 
+var session=require("express-session")
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
@@ -34,6 +35,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use('/public', express.static(path.join(__dirname, 'public')));
 
+app.use(session({secret:"key",cookie:{maxAge:3600000}}))
 db.connect((err)=>{
   if(err) console.log("Database connection error"+err)
   else console.log("Database connected to port 27017")

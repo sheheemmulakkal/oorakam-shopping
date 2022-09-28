@@ -24,8 +24,10 @@ module.exports = {
 
             let user = await db.get().collection(collection.USER_COLLECTIONS).findOne({Email:userData.Email})
             if(user){
-                bcrypt.compare(JSON.stringify(userData.Password), JSON.stringify(user.Password)).then((status)=>{
+                bcrypt.compare(userData.Password,user.Password).then((status)=>{
                     if(status){
+
+                        console.log("login success");
                     response.user=user
                     response.status=true
                     resolve(response)
