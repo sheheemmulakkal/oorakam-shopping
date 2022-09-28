@@ -1,6 +1,7 @@
 const { resolve, reject } = require('promise')
 var db = require('../config/connection')
 var collection = require('../config/collection')
+var objectId = require("mongodb").ObjectId
 const { response } = require('../app')
 
 module.exports={
@@ -36,10 +37,15 @@ module.exports={
                 console.log(data);
                 resolve(data[0])
             })
-               
-                
             })
        
     },
-    
+    getProductDetails:(prodId)=>{
+        return new Promise(async(resolve,reject)=>{
+          await db.get().collection(collection.PRODUCT_COLLECTIONS).findOne({_id:objectId(prodId)}).then((response)=>{
+            resolve(response)
+          })
+        })
+
+    }
 }

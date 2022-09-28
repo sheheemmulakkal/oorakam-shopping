@@ -39,6 +39,12 @@ router.post('/add-goldRate',(req,res)=>{
 })
 
 
+router.get('/edit-product/:id',async(req,res)=>{
+  let prodId= req.params.id
+  let products =await productHelpers.getProductDetails(prodId)
+  res.render('admin/edit-product',{products})
+})
+
 
 
 module.exports = router;
