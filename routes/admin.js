@@ -3,10 +3,10 @@ var router = express.Router();
 var productHelpers = require('../helpers/product-helpers')
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
-
+router.get('/', async function(req, res, next) {
+ let products= await productHelpers.getAllProducts()
   
-  res.render('admin/admin-home',{admin:true});
+  res.render('admin/admin-home',{admin:true,products});
 });
 
 router.get('/add-products',(req,res)=>{
@@ -37,6 +37,8 @@ router.post('/add-goldRate',(req,res)=>{
     res.render('admin/add-goldRate')
   })
 })
+
+
 
 
 module.exports = router;

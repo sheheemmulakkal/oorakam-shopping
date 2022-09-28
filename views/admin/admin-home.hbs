@@ -1,3 +1,54 @@
-<a href="/admin/add-products" class="btn btn-success" >Add product</a>
-<br> <br><br>
-<a href="/admin/add-goldRate" class="btn btn-success" >Add gold rate</a>
+
+
+
+
+
+<section>
+    <div class="container">
+        <div class="row mt-4">
+            <a class="btn btn-success ml-auto" href="/admin/add-products">Add product</a>
+            <a class="btn btn-success ml-auto" href="/admin/add-goldRate">Update gold rate</a>
+        </div>
+        <br><br>
+        <table id="products-table" class="table mt-4">
+            <thead>
+                <tr>
+                    
+                    <th scope="col">Name</th>
+                    <th scope="col">Catogery</th>
+                    <th scope="col">MC</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Weight</th>
+                    <th>Image</th>
+                    <th>Options</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each products}}
+                <tr>
+                    
+                    <td>{{this.Name}}</td>
+                    <td>{{this.Catogery}}</td>
+                    <td>{{this.MC}}</td>
+                    <td>{{this.Price}}</td>
+                    <td>{{this.Weight}}</td>
+                    <td><img style="width: ;50px; height: 50px " src="/public/images/product-images/{{this._id}}.jpg" alt=""></td>
+                    <td>
+                        <a href="/admin/edit-product/" class="btn btn-primary">Edit</a>
+                        <a href="/admin/delete-product/" class="btn btn-danger" onclick="return confirm('Do you want to delete {{this.Name}} ?')">Delete</a>
+                    </td>
+
+
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
+
+</section>
+
+<script>
+   $(document).ready(function() {
+        $('#products-table').DataTable();
+    });
+</script>
