@@ -47,5 +47,22 @@ module.exports={
           })
         })
 
+    },
+    updateProduct:(prodId,productDetails)=>{
+            console.log("2222");
+        return new Promise(async(resolve,reject)=>{
+            console.log("3333");
+           await db.get().collection(collection.PRODUCT_COLLECTIONS).updateOne({_id:objectId(prodId)},{
+                $set:{
+                    Name:productDetails.Name,
+                    Catogery:productDetails.Catogery,
+                    MC:productDetails.MC,
+                    Price:productDetails.Price,
+                    Weight:productDetails.Weight
+                }
+            }).then((response)=>{
+                console.log("4444"+response);
+                resolve()            })
+        })
     }
 }
