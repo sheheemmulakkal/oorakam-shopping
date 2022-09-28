@@ -1,4 +1,5 @@
 var express = require('express');
+const { response } = require('../app');
 var router = express.Router();
 var productHelpers = require('../helpers/product-helpers')
 
@@ -46,11 +47,22 @@ router.get('/edit-product/:id',async(req,res)=>{
 })
 
 router.post('/edit-product/:id',(req,res)=>{
-  let prodId= req.params.id
+  
   console.log("1111");
-productHelpers.updateProduct(prodId,req.body).then(()=>{
+productHelpers.updateProduct(req.params.id,req.body).then(()=>{
   res.redirect('/admin')
+  if(req?.files?.Image){
+    let image=req.files.Image
+    image.mv('./public/images/product-images/'+req.params.id+'.jpg')
+  }
 })
+})
+
+router.get('/delete-product/:id',(req,res)=>{
+  
+  productHelpers.deleteProduct(req.params.id).then((response)=>{
+    res.redirect('/admin')
+  })
 })
 
 

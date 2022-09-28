@@ -64,5 +64,12 @@ module.exports={
                 console.log("4444"+response);
                 resolve()            })
         })
+    },
+    deleteProduct:(prodId)=>{
+      return new Promise((resolve,reject)=>{
+        db.get().collection(collection.PRODUCT_COLLECTIONS).deleteOne({_id:objectId(prodId)}).then((response)=>{
+            resolve(response)
+        })
+      })
     }
 }
