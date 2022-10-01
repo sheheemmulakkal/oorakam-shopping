@@ -32,7 +32,7 @@ router.get('/add-goldrate',(req,res)=>{
 })
 
 router.post('/add-goldRate',(req,res)=>{
- 
+  console.log(req.body);
   productHelpers.goldRate(req.body).then(()=>{
   
     res.render('admin/add-goldRate')
