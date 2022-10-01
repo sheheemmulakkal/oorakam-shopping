@@ -6,4 +6,3 @@ router.get('/', function(req, res, next) {
   res.render('user/user-home');
 });
 
-module.exports = router;
