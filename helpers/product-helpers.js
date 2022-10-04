@@ -23,7 +23,7 @@ module.exports={
         })
     },
     goldRate:(goldRate)=>{
-        let goldRateDate={goldRate, dateAdded: new Date() }
+        let goldRateDate={ dateAdded: new Date(), goldRate }
         return new Promise(async(resolve,reject)=>{
            await db.get().collection(collection.GOLDRATE_COLLECTIONS).insertOne(goldRateDate).then(()=>{
                 resolve()
@@ -33,13 +33,20 @@ module.exports={
     getGoldRate:()=>{
         return new Promise(async(resolve,reject)=>{
             
-            db.get().collection(collection.GOLDRATE_COLLECTIONS).find().sort({ Goldrate: -1 }).limit(1).toArray()
-            .then((data)=>{
-                console.log('hhihih');
-                console.log(data[0].goldRate);
-                console.log('hhihih');
-                resolve(data[0].goldRate)
-            })
+            let rate = await db.get().collection(collection.GOLDRATE_COLLECTIONS).aggregate([
+                {$sort:{ 'dateAdded':-1 }
+            },
+            {
+                $project:{"goldRate.Goldrate":1}
+            },
+            {
+                $limit:1
+            },
+            {
+                $group:{_id:'$goldRate.Goldrate'}
+            }]).toArray()
+            console.log(rate[0]);
+            resolve(rate[0])
             })
        
     },

@@ -20,9 +20,11 @@ router.get('/',async function(req, res, next) {
   let user=req.session.user
   
   let goldRate=await productHelpers.getGoldRate()
-  console.log(goldRate.Goldrate);
+  let rate = goldRate._id
+  console.log('hi');
+  console.log(rate);
   productHelpers.getAllProducts().then((products)=>{
-    res.render('user/user-home',{products,user,goldRate});
+    res.render('user/user-home',{products,user,rate});
   })
 
 
