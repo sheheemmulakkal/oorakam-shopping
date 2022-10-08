@@ -1,0 +1,35 @@
+Aggregation for progection of MC and Weight
+
+ db.products.aggregate([{$project:{mc:{$toDouble:'$MC'},weight:{$toDouble:'$Weight'}}}])
+
+in here MC and Weight is converted to float because it contains float values like 2.5
+
+to convert float here used the expression $toDouble
+
+==================================================================
+
+Aggregation for find rate 
+ 
+ db.products.aggregate([{$project:{mc:{$toDouble:'$MC'},weight:{$toDouble:'$Weight'}}},{$project:{price:{$add:['$weight',{$multiply:['$weight',{$divide:['$mc',100]}]}]}}}])
+
+============================================================
+
+aggregation for extract latest goldrate
+
+db.goldRate.aggregate([{$sort:{'dateAdded':-1}},{$limit:1},{$group:{_id:'$goldRate.Goldrate'}},{$unwind:'$_id'}])
+
+
+floated rate
+
+db.goldRate.aggregate([{$sort:{'dateAdded':-1}},{$limit:1},{$project:{rate:{$toDouble:'$goldRate.Goldrate'},_id:0}}])
+
+==========================
+
+unwinded product price with goldrate
+
+db.products.aggregate([{$project:{mc:{$toDouble:'$MC'},weight:{$toDouble:'$Weight'}}},{$project:{price:{$add:['$weight',{$multiply:['$weight',{$divide:['$mc',100]}]}]}}},{$unionWith:{coll:'goldRate',pipeline:[{$sort:{'dateAdded':-1}},{$limit:1},{$group:{_id:'$goldRate.Goldrate'}},{$unwind:'$_id'}]}}])
+
+
+after changed gold rate ID to rate(most valid)
+
+db.products.aggregate([{$project:{mc:{$toDouble:'$MC'},weight:{$toDouble:'$Weight'}}},{$project:{price:{$add:['$weight',{$multiply:['$weight',{$divide:['$mc',100]}]}]}}},{$unionWith:{coll:'goldRate',pipeline:[{$sort:{'dateAdded':-1}},{$limit:1},{$project:{rate:{$toDouble:'$goldRate.Goldrate'},_id:0}}]}}])

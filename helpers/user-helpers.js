@@ -4,6 +4,8 @@ const bcrypt = require('bcrypt')
 const { resolve, reject } = require('promise')
 const { ObjectId } = require('mongodb')
 const { response } = require('../app')
+const { promise } = require('bcrypt/promises')
+const async = require('hbs/lib/async')
 
 
 module.exports = {
@@ -68,6 +70,7 @@ module.exports = {
                 })
             }
         })
-    }
+    },
+    
 
 }

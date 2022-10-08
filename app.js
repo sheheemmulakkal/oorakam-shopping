@@ -7,6 +7,8 @@ var bodyParser = require('body-parser');
 var hbs = require('express-handlebars')
 var db=require('./config/connection')
 
+var helpers = require('handlebars-helpers')
+
 var adminRouter = require('./routes/admin');
 var userRouter = require('./routes/users');
 

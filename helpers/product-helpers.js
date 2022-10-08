@@ -6,6 +6,8 @@ const { response } = require('../app')
 
 module.exports={
     addProducts:(productDetails)=>{
+    
+           
         return new Promise(async(resolve,reject)=>{
            await db.get().collection(collection.PRODUCT_COLLECTIONS).insertOne(productDetails).then((data)=>{
                
@@ -17,7 +19,6 @@ module.exports={
     getAllProducts:()=>{
         return new Promise(async(resolve,reject)=>{
            await db.get().collection(collection.PRODUCT_COLLECTIONS).find().toArray().then((products)=>{
-               
                 resolve(products)
             })
         })
@@ -26,11 +27,12 @@ module.exports={
         let goldRateDate={ dateAdded: new Date(), goldRate }
         return new Promise(async(resolve,reject)=>{
            await db.get().collection(collection.GOLDRATE_COLLECTIONS).insertOne(goldRateDate).then(()=>{
+           
                 resolve()
             })
         })
     },
-    getGoldRate:()=>{
+    getGoldRate:(value)=>{
         return new Promise(async(resolve,reject)=>{
             
             let rate = await db.get().collection(collection.GOLDRATE_COLLECTIONS).aggregate([
@@ -45,7 +47,8 @@ module.exports={
             {
                 $group:{_id:'$goldRate.Goldrate'}
             }]).toArray()
-            console.log(rate[0]);
+            
+            console.log(rate);
             resolve(rate[0])
             })
        

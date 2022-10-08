@@ -15,6 +15,7 @@
 			<!-- Wrapper for carousel items -->
 			
 					<div class="row">
+						
                         {{#each products}}
 						<div class="col-sm-4 col-md-3 mt-3 mb-3">
 							<div class="thumb-wrapper">
@@ -23,8 +24,10 @@
 									<img style="height: 100px;width:100px;"  src="/public/images/product-images/{{this._id}}.jpg" class="img-fluid" alt="">									
 								</div>
 								<div class="thumb-content">
-									<h5 class="mt-2"><b>{{this.Name}}</b></h5>									
+									<h5 class="mt-2"><b>{{this.Name}}</b></h5>	
+																	
 									<p class="item-price"><strike></strike> <b>Price : Rs.{{this.Price}}</b></p>
+									
                                     <p class="item-price"><strike></strike> <b>{{this.Catogery}}</b></p>
                                     <p class="item-price"><strike></strike> <b>Weight : {{this.Weight}}g</b></p>
 									<a href="/add-to-cart/{{this._id}}" class="btn btn-primary">Add to Cart</a>
@@ -32,8 +35,8 @@
 							</div>
 						</div>
 								
-							{{/each}}						
-						
+													
+						{{/each}}
 				
 						
 				</div>
@@ -48,6 +51,8 @@
 
 
 <!------------------>
+
+
 
 <style>
 body {

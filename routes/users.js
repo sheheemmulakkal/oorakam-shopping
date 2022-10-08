@@ -19,12 +19,18 @@ const verifyLogin=(req,res,next)=>{
 router.get('/',async function(req, res, next) {
   let user=req.session.user
   
-  let goldRate=await productHelpers.getGoldRate()
+  let goldRate=await productHelpers.getGoldRate({test:10})
   let rate = goldRate._id
-  console.log('hi');
   console.log(rate);
+ 
+
+
   productHelpers.getAllProducts().then((products)=>{
-    res.render('user/user-home',{products,user,rate});
+    
+  
+  
+    console.log(products);
+    res.render('user/user-home',{products,user,rate,value:5});
   })
 
 
@@ -67,7 +73,11 @@ router.get('/logout',(req,res)=>{
 })
 
 router.get('/cart',verifyLogin,(req,res)=>{
-  res.render('user/cart')
+    productHelpers.getAllProducts().then((response)=>{
+      console.log(response);
+      res.render('user/cart',{status:true,response})
+    })
+ 
 })
 
 router.get('/add-to-cart/:id',verifyLogin,(req,res)=>{
