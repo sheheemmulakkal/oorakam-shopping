@@ -16,10 +16,9 @@ router.get('/add-products',(req,res)=>{
 
 router.post('/add-products',(req,res)=>{
   productHelpers.addProducts(req.body).then((id)=>{
-    let image=req.files.Image
+    let image=req?.files?.Image
     image.mv('./public/images/product-images/'+id+'.jpg').then((err)=>{
       if(!err){
-        console.log('hiiiii');
         res.render('admin/add-products')
       }else{
         console.log(err)
@@ -36,7 +35,7 @@ router.post('/add-goldRate',(req,res)=>{
   productHelpers.goldRate(req.body).then(()=>{
     
   
-    res.render('admin/add-goldRate')
+    res.render('admin/add-goldRate') 
   })
 })
 

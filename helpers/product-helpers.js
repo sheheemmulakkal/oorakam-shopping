@@ -6,21 +6,27 @@ const { response } = require('../app')
 
 module.exports={
     addProducts:(productDetails)=>{
-    
+        
+       
+        
            
         return new Promise(async(resolve,reject)=>{
+            productDetails["Price"]=(productDetails.Weight*(productDetails.MC/100))+productDetails.Weight
+            console.log(productDetails);
+
            await db.get().collection(collection.PRODUCT_COLLECTIONS).insertOne(productDetails).then((data)=>{
                
                 resolve(data.insertedId)
             })
             
         })
-    },
+    }, 
     getAllProducts:()=>{
         return new Promise(async(resolve,reject)=>{
            await db.get().collection(collection.PRODUCT_COLLECTIONS).find().toArray().then((products)=>{
                 resolve(products)
             })
+
         })
     },
     goldRate:(goldRate)=>{
@@ -62,9 +68,10 @@ module.exports={
 
     },
     updateProduct:(prodId,productDetails)=>{
-            console.log("2222");
+        console.log(productDetails);
+     
+        productDetails["Price"]=((productDetails.MC/100)+1)*productDetails.Weight
         return new Promise(async(resolve,reject)=>{
-            console.log("3333");
            await db.get().collection(collection.PRODUCT_COLLECTIONS).updateOne({_id:objectId(prodId)},{
                 $set:{
                     Name:productDetails.Name,

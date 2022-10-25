@@ -22,15 +22,13 @@ router.get('/',async function(req, res, next) {
   let goldRate=await productHelpers.getGoldRate({test:10})
   let rate = goldRate._id
   console.log(rate);
- 
-
-
   productHelpers.getAllProducts().then((products)=>{
+   
+    products.forEach((product)=>{
+      product.Price=product.Price*rate
+    })
     
-  
-  
-    console.log(products);
-    res.render('user/user-home',{products,user,rate,value:5});
+    res.render('user/user-home',{products,user,rate});
   })
 
 
